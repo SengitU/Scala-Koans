@@ -5,6 +5,8 @@ import support.KoanSuite
 class AboutUniformAccessPrinciple extends KoanSuite {
 
   class CalculatesAgeUsingMethod(var currentYear: Int, birthYear: Int) {
+    // methods calculate upon the call, hence tracks the changes. 
+    // val is calculated once, does not track change.
 
     def age = currentYear - birthYear
 
@@ -12,32 +14,32 @@ class AboutUniformAccessPrinciple extends KoanSuite {
   }
 
   class CalculatesAgeUsingProperty(var currentYear: Int, birthYear: Int) {
-    // does age stay up to date if defined as a var instead of a val?
+    // does age stay up to date if defined as a var instead of a val? //Ugurcan: No
     val age = currentYear - birthYear
     // calculated at instantiation, returns property when called
   }
 
   koan("Can access age as parameterless method") {
     val me = new CalculatesAgeUsingMethod(2010, 2003)
-    me.age should be(__)
+    me.age should be(7)
   }
 
   koan("Can access age as property") {
     val me = new CalculatesAgeUsingProperty(2010, 2003)
-    me.age should be(__)
+    me.age should be(7)
   }
 
   koan("Cannot add parameter to Method invocation") {
     val me = new CalculatesAgeUsingMethod(2010, 2003)
     // uncomment following line to see what happens if you try to access parameterless method with parens
-    //me.age() should be (7)
+    // me.age() should be (7)
   }
   koan("What happens when I update current year using property") {
     val me = new CalculatesAgeUsingProperty(2010, 2003)
 
 
     me.currentYear = 2011
-    me.age should be(__)
+    me.age should be(7)
   }
 
   koan("What happens when I update current year using method") {
@@ -45,7 +47,7 @@ class AboutUniformAccessPrinciple extends KoanSuite {
 
 
     me.currentYear = 2011
-    me.age should be(__)
+    me.age should be(8)
   }
 
 
